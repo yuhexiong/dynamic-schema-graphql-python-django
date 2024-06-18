@@ -1,0 +1,13 @@
+tables:
+  - name: table
+    fields:
+      - name: name
+        type: String
+      - name: code
+        type: String
+      - name: time_stamp
+        type: Date
+      - name: quantity
+        type: Integer
+      - name: value
+        type: Double
