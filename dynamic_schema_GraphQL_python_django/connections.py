@@ -3,11 +3,12 @@ import yaml
 def get_mysql_connection(cfg_path):
 	db_connection = {
 		'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': None,
-		'USER': None,
-		"PASSWORD": None,
-		'HOST': None, }}
+			'ENGINE': 'django.db.backends.mysql',
+			'NAME': None,
+			'USER': None,
+			"PASSWORD": None,
+			'HOST': None
+		}}
 	
 	with open(cfg_path, 'r')as fp:
 		cfg = yaml.safe_load(fp)

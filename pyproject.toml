@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "dynamic-schema-graphql-python-django"
+version = "0.1.0"
+description = ""
+authors = ["yuhexiong <yuhexiong871210@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "4.1"
+pyyaml = "^6.0.1"
+graphene-django = "^3.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
