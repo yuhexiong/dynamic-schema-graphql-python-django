@@ -1,0 +1,141 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GraphQL API",
+    "description": "A simple example of a GraphQL API described with OpenAPI",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/graphql": {
+      "post": {
+        "summary": "Execute a GraphQL query",
+        "tags": [
+          "graphql"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The GraphQL query string. Format\n\n```graphql\n{\n  tableName(\n    column1Name: filter\n    column2Name: filter\n  ) {\n    column1Name\n    column2Name\n  }\n}\n```\nFilter\n```\n{\n  \"equals\": value, \n  \"greaterThan\": value, \n  \"greaterThanOrEquals\": value,\n  \"lessThan\": value, \n  \"lessThanOrEquals\": value, \n  \"between\": {\"start\": value, \"end\": value}\n}\n```",
+                    "example": "{\n  adventureGameHeroes(\n    joinDate: {between: {start: \"2023-04-01\", end: \"2023-10-01\"}}\n    occupation: {equals: \"Warrior\"}\n  ) {\n    id\n    joinDate\n    heroName\n    occupation\n    level\n    weaponName\n    weaponType\n    weaponPower\n    equipmentStatus\n  }\n}"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "description": "Variables for the GraphQL query"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tableName": {
+                          "type": "array",
+                          "description": "table",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "columnName": {
+                                "type": "string",
+                                "description": "the value of this column"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "The data returned by the GraphQL query"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "description": "The error message"
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "line": {
+                                  "type": "integer",
+                                  "description": "The line number of the error"
+                                },
+                                "column": {
+                                  "type": "integer",
+                                  "description": "The column number of the error"
+                                }
+                              }
+                            }
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "The path of the error"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "data": {
+                      "adventureGameHeroes": [
+                        {
+                          "id": 5,
+                          "heroName": "Eowyn",
+                          "occupation": "Warrior",
+                          "level": 9,
+                          "weaponName": "Golden Shield",
+                          "weaponType": "Shield",
+                          "weaponPower": 35.8,
+                          "equipmentStatus": "Equipped",
+                          "joinDate": "2023-05-01"
+                        },
+                        {
+                          "id": 9,
+                          "heroName": "Boromir",
+                          "occupation": "Warrior",
+                          "level": 8,
+                          "weaponName": "Gondorian Sword",
+                          "weaponType": "Sword",
+                          "weaponPower": 48.7,
+                          "equipmentStatus": "Equipped",
+                          "joinDate": "2023-09-01"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Local server"
+    }
+  ]
+}

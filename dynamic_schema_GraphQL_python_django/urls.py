@@ -18,10 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 from myapp import schema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema.schema))),
 ]
