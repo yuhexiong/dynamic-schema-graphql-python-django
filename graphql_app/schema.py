@@ -1,6 +1,6 @@
 import graphene
-from myapp import models
-from myapp.filters import get_filter_argument
+from graphql_app import models
+from graphql_app.filters import get_filter_argument
 from django.db.models import Q 
 
 class Query(graphene.ObjectType):
