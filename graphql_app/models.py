@@ -40,7 +40,7 @@ for table in schema_yaml['tables']:
     model_name = table['name'].capitalize()
     model_class = type(model_name, (models.Model,), attrs)
 
-    graphql_type = type(table['name'] + "Type", (DjangoObjectType,), {
+    graphql_type = type(table['name'] + "_type", (DjangoObjectType,), {
         'Meta': type('Meta', (), {'model': model_class}),
         **graphql_attrs
     })
