@@ -43,7 +43,7 @@ def get_filter_argument(field):
         return {field.name: graphene.Argument(FilterIntInput)}
     elif isinstance(field, models.FloatField):
         return {field.name: graphene.Argument(FilterFloatInput)}
-    elif isinstance(field, models.DateField):
+    elif isinstance(field, models.DateField) or isinstance(field, models.DateTimeField):
         return {field.name: graphene.Argument(FilterDateInput)}
     else:
         return {field.name: graphene.Argument(FilterStringInput)}

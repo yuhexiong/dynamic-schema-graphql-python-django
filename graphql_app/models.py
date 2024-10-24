@@ -32,15 +32,17 @@ for table in schema_yaml['tables']:
         elif field_type == 'Date':
             attrs[field['name']] = models.DateField(primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.Date()
+        elif field_type == 'DateTime':
+            attrs[field['name']] = models.DateTimeField(primary_key=not primary_key_set)
+            graphql_attrs[field['name']] = graphene.DateTime()
         elif field_type == 'Double':
             attrs[field['name']] = models.FloatField(primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.Float()
         primary_key_set = True
 
-    model_name = table['name'].capitalize()
+    model_name = table['name']
     model_class = type(model_name, (models.Model,), attrs)
-
-    graphql_type = type(table['name'] + "_type", (DjangoObjectType,), {
+    graphql_type = type(table['name'], (DjangoObjectType,), {
         'Meta': type('Meta', (), {'model': model_class}),
         **graphql_attrs
     })
