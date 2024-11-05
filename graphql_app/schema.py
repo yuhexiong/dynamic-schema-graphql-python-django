@@ -2,6 +2,7 @@ import graphene
 from graphql_app import models
 from graphql_app.filters import get_filter_argument
 from django.db.models import Q 
+import dynamic_schema_GraphQL_python_django.settings as settings
 
 class OrderEnum(graphene.Enum):
     ASC = "ASC"
@@ -16,7 +17,7 @@ class Query(graphene.ObjectType):
     pass
 
 def make_resolver(graphql_type):
-    def resolve_dynamic_model(self, info, offset=0, limit=1000, order_by=None, filter=None, **kwargs):
+    def resolve_dynamic_model(self, info, offset=settings.DEFAULT_OFFSET, limit=settings.DEFAULT_LIMIT, order_by=None, filter=None, **kwargs):
         query = Q()
         if filter:
             for field, operations in filter.items():
@@ -54,8 +55,8 @@ def make_resolver(graphql_type):
 
 for table_name, graphql_type in models.graphql_types.items():
     args = {
-        'offset': graphene.Argument(graphene.Int, default_value=0),
-        'limit': graphene.Argument(graphene.Int, default_value=1000),
+        'offset': graphene.Argument(graphene.Int, default_value=settings.DEFAULT_OFFSET),
+        'limit': graphene.Argument(graphene.Int, default_value=settings.DEFAULT_LIMIT),
         'order_by': graphene.Argument(graphene.List(OrderByInput))
     }
 
