@@ -88,7 +88,7 @@ localhost:8000/graphql
 
 ### Query
 
-**(i) filter option**
+(i) filter option
 ```
 "equals": value, 
 "greater_than": value, 
@@ -97,9 +97,9 @@ localhost:8000/graphql
 "less_than_or_equals": value, 
 "between": {"start": value, "end": value}
 ```
-**(ii) limit**  
-**(iii) offset**  
-**(vi) order_by: [ {column, order: ASC/DESC} ]**  
+(ii) limit  
+(iii) offset  
+(vi) order_by: [ {column, order: ASC/DESC} ]  
 
 #### Example  
 ```graphql
@@ -139,7 +139,7 @@ query {
 ```
 ![image](./images/ui_example.png)
 
-## Swagger
+### Swagger
 ```
 localhost:8000/swagger-ui  
 ```
