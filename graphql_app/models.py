@@ -3,7 +3,7 @@ import os
 from django.db import models
 import graphene
 from graphene_django import DjangoObjectType
-from dynamic_schema_GraphQL_python_django.settings import BASE_DIR
+from dynamic_schema_graphql.settings import BASE_DIR
 
 schema_path = os.path.join(BASE_DIR, "etc", "schema.yaml")
 with open(schema_path, "r") as file:

@@ -1,5 +1,5 @@
 """
-ASGI config for dynamic_schema_GraphQL_python_django project.
+ASGI config for dynamic_schema_graphql project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dynamic_schema_GraphQL_python_django.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dynamic_schema_graphql.settings')
 
 application = get_asgi_application()

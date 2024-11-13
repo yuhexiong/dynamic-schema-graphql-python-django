@@ -9,9 +9,7 @@
     "/graphql": {
       "post": {
         "summary": "Execute a GraphQL query",
-        "tags": [
-          "graphql"
-        ],
+        "tags": ["graphql"],
         "requestBody": {
           "required": true,
           "content": {
@@ -21,8 +19,8 @@
                 "properties": {
                   "query": {
                     "type": "string",
-                    "description": "The GraphQL query string. Format\n\n```graphql\n{\n  tableName(\n    column1Name: filter\n    column2Name: filter\n  ) {\n    column1Name\n    column2Name\n  }\n}\n```\nFilter\n```\n{\n  \"equals\": value, \n  \"greaterThan\": value, \n  \"greaterThanOrEquals\": value,\n  \"lessThan\": value, \n  \"lessThanOrEquals\": value, \n  \"between\": {\"start\": value, \"end\": value}\n}\n```",
-                    "example": "{\n  adventureGameHeroes(\n    joinDate: {between: {start: \"2023-04-01\", end: \"2023-10-01\"}}\n    occupation: {equals: \"Warrior\"}\n  ) {\n    id\n    joinDate\n    heroName\n    occupation\n    level\n    weaponName\n    weaponType\n    weaponPower\n    equipmentStatus\n  }\n}"
+                    "description": "The GraphQL query string. Format\n\n```graphql\n{\n  table_name(\n    filter: {\n      column_name: {\n        filter_option\n      }\n    },\n    limit: int,\n    offset: int,\n    order_by: [\n      {\n        column: column_name,\n        order: ASC or DESC\n      }\n    ]\n  ) {\n    column1_name\n    column2_name\n  }\n}\n```\nFilter option\n```\n{\n  \"equals\": value, \n  \"greater_than\": value, \n  \"greater_than_or_equals\": value,\n  \"less_than\": value, \n  \"less_than_or_equals\": value, \n  \"between\": {\"start\": value, \"end\": value}\n}\n",
+                    "example": "query {\n  adventure_game_heroes (\n    filter: {\n      join_date: {\n        between: {\n          start: \"2023-04-01\",\n          end: \"2023-10-01\"\n        }\n      },\n      occupation: {\n        equals: \"Warrior\"\n      }\n    },\n    limit: 3,\n    offset: 0,\n    order_by: [\n      {\n        column: \"join_date\",\n        order: ASC\n      }\n    ]\n  ) {\n    id,\n    join_date,\n    hero_name,\n    occupation,\n    level,\n    weapon_name,\n    weapon_type,\n    weapon_power,\n    equipment_status\n  }\n}"
                   },
                   "variables": {
                     "type": "object",
@@ -98,28 +96,28 @@
                   },
                   "example": {
                     "data": {
-                      "adventureGameHeroes": [
+                      "adventure_game_heroes": [
                         {
                           "id": 5,
-                          "heroName": "Eowyn",
+                          "join_date": "2023-05-01",
+                          "hero_name": "Eowyn",
                           "occupation": "Warrior",
                           "level": 9,
-                          "weaponName": "Golden Shield",
-                          "weaponType": "Shield",
-                          "weaponPower": 35.8,
-                          "equipmentStatus": "Equipped",
-                          "joinDate": "2023-05-01"
+                          "weapon_name": "Golden Shield",
+                          "weapon_type": "Shield",
+                          "weapon_power": 35.8,
+                          "equipment_status": "Equipped"
                         },
                         {
                           "id": 9,
-                          "heroName": "Boromir",
+                          "join_date": "2023-09-01",
+                          "hero_name": "Boromir",
                           "occupation": "Warrior",
                           "level": 8,
-                          "weaponName": "Gondorian Sword",
-                          "weaponType": "Sword",
-                          "weaponPower": 48.7,
-                          "equipmentStatus": "Equipped",
-                          "joinDate": "2023-09-01"
+                          "weapon_name": "Gondorian Sword",
+                          "weapon_type": "Sword",
+                          "weapon_power": 48.7,
+                          "equipment_status": "Equipped"
                         }
                       ]
                     }
