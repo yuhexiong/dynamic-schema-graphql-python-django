@@ -11,8 +11,15 @@ define Doris table schema in yaml and fetch data in GraphiQL.
 
 ### ENV
 
-etc/database.yaml
+copy .env.example as .env  
+able to change SECRET_KEY  
+```yaml
+SECRET_KEY='django-insecure-qywaz)eg+ua2q26x$^3*&sr&gh0ca74*n^mm4j-*h)!80#&^9p'
+DEBUG=True
 ```
+
+etc/database.yaml
+```yaml
 host: localhost
 name: database
 user: root
@@ -22,7 +29,7 @@ port: 9030
 
 etc/schema.yaml  
 enabled data type: `String`, `Integer`, `Double`, `Date`
-```
+```yaml
 tables:
   - name: adventure_game_heroes
     fields:
@@ -56,13 +63,13 @@ tables:
 ## Run
 
 ### Run Docker
-```
+```bash
 docker compose up -d
 ```
 
 ### Run Local
 
-```
+```bash
 poetry install
 ```
 
@@ -70,7 +77,7 @@ activate poetry environment
 windows: click .venv/Scripts/activate.bat  
 
 
-```
+```bash
 python manage.py runserver
 ```
 
