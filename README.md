@@ -99,7 +99,7 @@ localhost:8000/graphql
 ```
 (ii) limit  
 (iii) offset  
-(vi) order_by: [ {column, order: ASC/DESC} ]  
+(iv) order_by: [ {column, order: ASC/DESC} ]  
 
 #### Example  
 ```graphql
