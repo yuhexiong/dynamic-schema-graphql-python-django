@@ -19,46 +19,72 @@ paths:
                 query:
                   type: string
                   description: |
-                    The GraphQL query string. 
-                    Format
-                  
+                    The GraphQL query string. Format
+
                     ```graphql
                     {
-                      tableName(
-                        column1Name: filter
-                        column2Name: filter
+                      table_name(
+                        filter: {
+                          column_name: {
+                            filter_option
+                          }
+                        },
+                        limit: int,
+                        offset: int,
+                        order_by: [
+                          {
+                            column: column_name,
+                            order: ASC or DESC
+                          }
+                        ]
                       ) {
-                        column1Name
-                        column2Name
+                        column1_name
+                        column2_name
                       }
                     }
                     ```
-                    Filter
+                    Filter option
                     ```
                     {
                       "equals": value, 
-                      "greaterThan": value, 
-                      "greaterThanOrEquals": value,
-                      "lessThan": value, 
-                      "lessThanOrEquals": value, 
+                      "greater_than": value, 
+                      "greater_than_or_equals": value,
+                      "less_than": value, 
+                      "less_than_or_equals": value, 
                       "between": {"start": value, "end": value}
                     }
-                    ```
-                  example: |
-                    {
-                      adventureGameHeroes(
-                        joinDate: {between: {start: "2023-04-01", end: "2023-10-01"}}
-                        occupation: {equals: "Warrior"}
+                  example: |-
+                    query {
+                      adventure_game_heroes (
+                        filter: {
+                          join_date: {
+                            between: {
+                              start: "2023-04-01",
+                              end: "2023-10-01"
+                            }
+                          },
+                          occupation: {
+                            equals: "Warrior"
+                          }
+                        },
+                        limit: 3,
+                        offset: 0,
+                        order_by: [
+                          {
+                            column: "join_date",
+                            order: ASC
+                          }
+                        ]
                       ) {
-                        id
-                        joinDate
-                        heroName
-                        occupation
-                        level
-                        weaponName
-                        weaponType
-                        weaponPower
-                        equipmentStatus
+                        id,
+                        join_date,
+                        hero_name,
+                        occupation,
+                        level,
+                        weapon_name,
+                        weapon_type,
+                        weapon_power,
+                        equipment_status
                       }
                     }
                 variables:
@@ -111,26 +137,25 @@ paths:
                           description: The path of the error
                 example:
                   data:
-                      adventureGameHeroes:
-                        - id: 5
-                          heroName: "Eowyn"
-                          occupation: "Warrior"
-                          level: 9
-                          weaponName: "Golden Shield"
-                          weaponType: "Shield"
-                          weaponPower: 35.8
-                          equipmentStatus: "Equipped"
-                          joinDate: "2023-05-01"
-                        - id: 9
-                          heroName: "Boromir"
-                          occupation: "Warrior"
-                          level: 8
-                          weaponName: "Gondorian Sword"
-                          weaponType: "Sword"
-                          weaponPower: 48.7
-                          equipmentStatus: "Equipped"
-                          joinDate: "2023-09-01"
-
+                    adventure_game_heroes:
+                      - id: 5
+                        join_date: '2023-05-01'
+                        hero_name: Eowyn
+                        occupation: Warrior
+                        level: 9
+                        weapon_name: Golden Shield
+                        weapon_type: Shield
+                        weapon_power: 35.8
+                        equipment_status: Equipped
+                      - id: 9
+                        join_date: '2023-09-01'
+                        hero_name: Boromir
+                        occupation: Warrior
+                        level: 8
+                        weapon_name: Gondorian Sword
+                        weapon_type: Sword
+                        weapon_power: 48.7
+                        equipment_status: Equipped
 servers:
   - url: http://localhost:8000
     description: Local server

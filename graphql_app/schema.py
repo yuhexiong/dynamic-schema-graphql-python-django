@@ -2,7 +2,7 @@ import graphene
 from graphql_app import models
 from graphql_app.filters import get_filter_argument
 from django.db.models import Q 
-import dynamic_schema_GraphQL_python_django.settings as settings
+import dynamic_schema_graphql.settings as settings
 
 class OrderEnum(graphene.Enum):
     ASC = "ASC"

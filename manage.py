@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dynamic_schema_GraphQL_python_django.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dynamic_schema_graphql.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
