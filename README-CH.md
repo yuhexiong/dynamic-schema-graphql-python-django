@@ -1,27 +1,22 @@
 # Dynamic Schema GraphQL Django
 
-**(also provided Traditional Chinese version document [README-CH.md](README-CH.md).)**
-
-
-define Doris table schema in yaml and fetch data in GraphiQL.  
-
+使用 YAML 定義 Doris 表格結構並在 GraphiQL 中取得資料。  
 
 ## Overview
 
-- Language: Python v3.12
-- Web FrameWork: Django v4.1
-
+- 語言：Python v3.12  
+- 網頁框架：Django v4.1  
 
 ### ENV
 
-copy `.env.example` as `.env`  
-able to change SECRET_KEY  
+將 `.env.example` 複製為 `.env`  
+可以更改 `SECRET_KEY`  
 ```yaml
 SECRET_KEY='django-insecure-qywaz)eg+ua2q26x$^3*&sr&gh0ca74*n^mm4j-*h)!80#&^9p'
 DEBUG=True
 ```
 
-etc/database.yaml
+`etc/database.yaml`  
 ```yaml
 host: localhost
 name: database
@@ -30,8 +25,8 @@ password: password
 port: 9030
 ```
 
-etc/schema.yaml  
-enabled data type: `String`, `Integer`, `Double`, `Date`
+`etc/schema.yaml`  
+支援的資料類型：`String`, `Integer`, `Double`, `Date`
 ```yaml
 tables:
   - name: adventure_game_heroes
@@ -76,9 +71,8 @@ docker compose up -d
 poetry install
 ```
 
-activate poetry environment  
-windows: click .venv/Scripts/activate.bat  
-
+啟用 Poetry 環境  
+Windows: 點擊 `.venv/Scripts/activate.bat`  
 
 ```bash
 python manage.py runserver
@@ -90,6 +84,7 @@ localhost:8000/graphql
 ```
 
 ### Query
+
 
 (i) filter option
 ```
