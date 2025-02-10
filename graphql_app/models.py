@@ -1,8 +1,10 @@
-import yaml
 import os
-from django.db import models
+
 import graphene
+import yaml
+from django.db import models
 from graphene_django import DjangoObjectType
+
 from dynamic_schema_graphql.settings import BASE_DIR
 
 schema_path = os.path.join(BASE_DIR, "etc", "schema.yaml")
@@ -24,19 +26,24 @@ for table in schema_yaml['tables']:
     for field in table['fields']:
         field_type = field['type']
         if field_type == 'String':
-            attrs[field['name']] = models.CharField(max_length=255, primary_key=not primary_key_set)
+            attrs[field['name']] = models.CharField(
+                max_length=255, primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.String()
         elif field_type == 'Integer':
-            attrs[field['name']] = models.IntegerField(primary_key=not primary_key_set)
+            attrs[field['name']] = models.IntegerField(
+                primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.Int()
         elif field_type == 'Date':
-            attrs[field['name']] = models.DateField(primary_key=not primary_key_set)
+            attrs[field['name']] = models.DateField(
+                primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.Date()
         elif field_type == 'DateTime':
-            attrs[field['name']] = models.DateTimeField(primary_key=not primary_key_set)
+            attrs[field['name']] = models.DateTimeField(
+                primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.DateTime()
         elif field_type == 'Double':
-            attrs[field['name']] = models.FloatField(primary_key=not primary_key_set)
+            attrs[field['name']] = models.FloatField(
+                primary_key=not primary_key_set)
             graphql_attrs[field['name']] = graphene.Float()
         primary_key_set = True
 

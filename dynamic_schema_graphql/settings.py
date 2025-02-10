@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from dynamic_schema_graphql.connections import get_mysql_connection
+from dotenv import load_dotenv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # Environment
-import os
-from dotenv import load_dotenv
+
 
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'dynamic_schema_graphql.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-from dynamic_schema_graphql.connections import get_mysql_connection
+
 DATABASE_YAML_PATH = os.path.join(BASE_DIR, "etc", "database.yaml")
 DATABASES = get_mysql_connection(DATABASE_YAML_PATH)
 

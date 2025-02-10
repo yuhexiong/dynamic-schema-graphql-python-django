@@ -1,12 +1,15 @@
 import graphene
+from django.db.models import Q
+
+import dynamic_schema_graphql.settings as settings
 from graphql_app import models
 from graphql_app.filters import get_filter_argument
-from django.db.models import Q 
-import dynamic_schema_graphql.settings as settings
+
 
 class OrderEnum(graphene.Enum):
     ASC = "ASC"
     DESC = "DESC"
+
 
 class OrderByInput(graphene.InputObjectType):
     column = graphene.String(required=True)
@@ -15,6 +18,7 @@ class OrderByInput(graphene.InputObjectType):
 
 class Query(graphene.ObjectType):
     pass
+
 
 def make_resolver(graphql_type):
     def resolve_dynamic_model(self, info, offset=settings.DEFAULT_OFFSET, limit=settings.DEFAULT_LIMIT, order_by=None, filter=None, **kwargs):
@@ -25,7 +29,8 @@ def make_resolver(graphql_type):
                     for operation, value in operations.items():
                         if value is not None:
                             if operation == 'between':
-                                query &= Q(**{f"{field}__range": (value['start'], value['end'])})
+                                query &= Q(
+                                    **{f"{field}__range": (value['start'], value['end'])})
                             elif operation == 'greater_than':
                                 query &= Q(**{f"{field}__gt": value})
                             elif operation == 'greater_than_or_equals':
@@ -53,6 +58,7 @@ def make_resolver(graphql_type):
         return qs[offset:offset + limit]
     return resolve_dynamic_model
 
+
 for table_name, graphql_type in models.graphql_types.items():
     args = {
         'offset': graphene.Argument(graphene.Int, default_value=settings.DEFAULT_OFFSET),
@@ -62,15 +68,18 @@ for table_name, graphql_type in models.graphql_types.items():
 
     filter = {}
     for field in graphql_type._meta.model._meta.fields:
-        filter_dict = get_filter_argument(field)  
-        filter_name, filter_argument = list(filter_dict.items())[0]  
+        filter_dict = get_filter_argument(field)
+        filter_name, filter_argument = list(filter_dict.items())[0]
         filter[filter_name] = filter_argument
 
-    FilterInputType = type(f"{graphql_type.__name__}FilterInput", (graphene.InputObjectType,), filter)
+    FilterInputType = type(
+        f"{graphql_type.__name__}FilterInput", (graphene.InputObjectType,), filter)
     args.update({'filter': graphene.Argument(FilterInputType)})
 
-    Query._meta.fields[table_name] = graphene.Field(graphene.List(graphql_type), resolver=make_resolver(graphql_type), args=args, name=table_name)
+    Query._meta.fields[table_name] = graphene.Field(graphene.List(
+        graphql_type), resolver=make_resolver(graphql_type), args=args, name=table_name)
 
     print(f"Added table '{table_name}' to Query with type {graphql_type}")
 
-schema = graphene.Schema(query=Query, types=list(models.graphql_types.values()), auto_camelcase=False)
+schema = graphene.Schema(query=Query, types=list(
+    models.graphql_types.values()), auto_camelcase=False)

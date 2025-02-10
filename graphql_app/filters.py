@@ -6,6 +6,7 @@ class FilterBetweenInput(graphene.InputObjectType):
     start = graphene.String()
     end = graphene.String()
 
+
 class FilterIntInput(graphene.InputObjectType):
     equals = graphene.Int()
     greater_than = graphene.Int()
@@ -13,6 +14,7 @@ class FilterIntInput(graphene.InputObjectType):
     less_than = graphene.Int()
     less_than_or_equals = graphene.Int()
     between = graphene.Field(FilterBetweenInput)
+
 
 class FilterFloatInput(graphene.InputObjectType):
     equals = graphene.Float()
@@ -22,6 +24,7 @@ class FilterFloatInput(graphene.InputObjectType):
     less_than_or_equals = graphene.Float()
     between = graphene.Field(FilterBetweenInput)
 
+
 class FilterStringInput(graphene.InputObjectType):
     equals = graphene.String()
     contains = graphene.List(graphene.String)
@@ -30,6 +33,7 @@ class FilterStringInput(graphene.InputObjectType):
     less_than = graphene.String()
     less_than_or_equals = graphene.String()
     between = graphene.Field(FilterBetweenInput)
+
 
 class FilterDateInput(graphene.InputObjectType):
     equals = graphene.Date()
